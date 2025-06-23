@@ -15,8 +15,8 @@ class StemTool(Subscriber, ezui.WindowController):
         > (+-) @HStemButton
         > Add V Stem
         > (+-) @VStemButton
-        > (Update) @updateButton
         > (Clear values) @clearButton
+        > (Save all) @saveButton
         """
 
         descriptionData = dict(
@@ -43,8 +43,8 @@ class StemTool(Subscriber, ezui.WindowController):
         self.refreshTable()
         self.w.open()
 
-    def updateButtonCallback(self, sender):
-        self.refreshTable()
+    def saveButtonCallback(self, sender):
+        self.saveFonts()
 
     def refreshTable(self):
         items = []
@@ -59,6 +59,10 @@ class StemTool(Subscriber, ezui.WindowController):
                 dict(name=name, stemSnapH=stemSnapH_str, stemSnapV=stemSnapV_str)
             )
         self.w.getItem("fontTable").set(items=items)
+
+    def saveFonts(self):
+        for font in AllFonts():
+            font.save()
 
     def fontDocumentDidOpen(self, info):
         self.refreshTable()
