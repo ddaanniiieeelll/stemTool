@@ -3,6 +3,7 @@
 from mojo.roboFont import AllFonts
 import ezui
 
+
 class StemTool(ezui.WindowController):
 
     def build(self):
@@ -22,22 +23,10 @@ class StemTool(ezui.WindowController):
                 items=[],
                 height=200,
                 columnDescriptions=[
-                    dict(
-                        identifier="name",
-                        title="Name",
-                        width=130
-                    ),
-                    dict(
-                        identifier="stemSnapH",
-                        title="StemSnapH",
-                        width=150
-                    ),
-                    dict(
-                        identifier="stemSnapV",
-                        title="StemSnapV",
-                        width=150
-                    ),
-                ]
+                    dict(identifier="name", title="Name", width=130),
+                    dict(identifier="stemSnapH", title="StemSnapH", width=150),
+                    dict(identifier="stemSnapV", title="StemSnapV", width=150),
+                ],
             )
         )
 
@@ -46,7 +35,7 @@ class StemTool(ezui.WindowController):
             size=(500, "auto"),
             content=content,
             descriptionData=descriptionData,
-            controller=self
+            controller=self,
         )
 
     def started(self):
@@ -65,14 +54,11 @@ class StemTool(ezui.WindowController):
             # comma-separated string for display
             stemSnapH_str = ", ".join(str(v) for v in stemSnapH) if stemSnapH else ""
             stemSnapV_str = ", ".join(str(v) for v in stemSnapV) if stemSnapV else ""
-            items.append(dict(
-                name=name,
-                stemSnapH=stemSnapH_str,
-                stemSnapV=stemSnapV_str
-            ))
+            items.append(
+                dict(name=name, stemSnapH=stemSnapH_str, stemSnapV=stemSnapV_str)
+            )
         self.w.getItem("fontTable").set(items=items)
 
-    
     def HStemButtonAddCallback(self, sender):
         f = CurrentFont()
         g = CurrentGlyph()
@@ -88,7 +74,6 @@ class StemTool(ezui.WindowController):
             print("Maximum of 12 values reached")
         self.refreshTable()
 
-
     def HStemButtonRemoveCallback(self, sender):
         f = CurrentFont()
         stem_snap_h = f.info.postscriptStemSnapH
@@ -96,7 +81,6 @@ class StemTool(ezui.WindowController):
             stem_snap_h = stem_snap_h[:-1]
             f.info.postscriptStemSnapH = stem_snap_h
         self.refreshTable()
-
 
     def VStemButtonAddCallback(self, sender):
         f = CurrentFont()
@@ -113,7 +97,6 @@ class StemTool(ezui.WindowController):
             print("Maximum of 12 values reached")
         self.refreshTable()
 
-
     def VStemButtonRemoveCallback(self, sender):
         f = CurrentFont()
         stem_snap_v = f.info.postscriptStemSnapV
@@ -121,7 +104,6 @@ class StemTool(ezui.WindowController):
             stem_snap_v = stem_snap_v[:-1]
             f.info.postscriptStemSnapV = stem_snap_v
         self.refreshTable()
-
 
     def clearButtonCallback(self, sender):
         for font in AllFonts():
@@ -133,5 +115,3 @@ class StemTool(ezui.WindowController):
 
 if __name__ == "__main__":
     StemTool()
-
-
