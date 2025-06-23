@@ -1,10 +1,11 @@
 # MenuTitle: Stem Tool
 
 from mojo.roboFont import AllFonts
+from mojo.subscriber import Subscriber
 import ezui
 
 
-class StemTool(ezui.WindowController):
+class StemTool(Subscriber, ezui.WindowController):
 
     def build(self):
         content = """
@@ -58,6 +59,12 @@ class StemTool(ezui.WindowController):
                 dict(name=name, stemSnapH=stemSnapH_str, stemSnapV=stemSnapV_str)
             )
         self.w.getItem("fontTable").set(items=items)
+
+    def fontDocumentDidOpen(self, info):
+        self.refreshTable()
+
+    def fontDocumentDidClose(self, info):
+        self.refreshTable()
 
     def HStemButtonAddCallback(self, sender):
         f = CurrentFont()
