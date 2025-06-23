@@ -5,6 +5,8 @@ Lists all currently open ufo’s and displays horizontal and vertical stemSnap v
 Additionally, on having 2 points selected, it can add vertical or horizontal stems, and remove the last stem value in the list.  
 The `Clear values` button obviuosly removes all stem values (horizontal and vertical), from all open fonts.
 
+![](Screenshot.png)
+
 ### Note:
 - Currently the table only takes ufo’s that are already open into account. If you open additional ufo’s after the script was run, click the `Update` button.
 - The changes are currently only in memory, so you need to save the fonts manually before closing them.
